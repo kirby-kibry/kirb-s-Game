@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kibry — Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1 class="logo"><span>K</span><span>i</span><span>b</span><span>r</span><span>y</span></h1>
+    <p>Cosmetics shop — spend the points you earned on canvas borders.</p>
+  </header>
+
+  <main>
+
+    <nav class="player-bar">
+      <span id="player-name" class="player-name"></span>
+      <span class="player-stats"><span id="player-points">0</span> points to spend</span>
+      <span class="nav-links">
+        <a href="index.html">Play</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </span>
+    </nav>
+
+    <section>
+      <h2>Catalog</h2>
+      <div id="shop-grid" class="cosmetic-grid"></div>
+      <p id="shop-message" class="message" role="status">Loading the shop...</p>
+    </section>
+
+    <section>
+      <h2>Equipped border</h2>
+      <p id="equipped-name">None &mdash; your canvas uses the plain border.</p>
+      <button type="button" id="unequip-btn" class="secondary">Use plain border</button>
+    </section>
+
+  </main>
+
+  <script type="module" src="shop.js" defer></script>
+
+</body>
+
+</html>

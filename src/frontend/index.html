@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kibry — Draw &amp; Guess</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1 class="logo"><span>K</span><span>i</span><span>b</span><span>r</span><span>y</span></h1>
+    <p>One player draws the secret word. The other has to guess it before the timer runs out.</p>
+  </header>
+
+  <!-- Shown only when signed out -->
+  <main id="auth-view" hidden>
+    <section id="auth-section">
+      <h2>Sign in to play</h2>
+
+      <form id="auth-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Your username" autocomplete="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 6 characters"
+          autocomplete="current-password" required>
+
+        <div class="button-row">
+          <button type="submit" id="login-btn">Log in</button>
+          <button type="button" id="register-btn" class="secondary">Create account</button>
+        </div>
+      </form>
+
+      <p id="auth-message" class="message" role="status"></p>
+    </section>
+  </main>
+
+  <!-- Shown only when signed in -->
+  <main id="game-view" hidden>
+
+    <nav class="player-bar">
+      <span id="player-name" class="player-name"></span>
+      <span class="player-stats">
+        <span id="player-points">0</span> points &middot;
+        <span id="player-score">0</span> total score
+      </span>
+      <span class="nav-links">
+        <a href="shop.html">Shop</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <button type="button" id="logout-btn" class="link-button">Log out</button>
+      </span>
+    </nav>
+
+    <!-- Step 1: open a room to draw in, or join one to guess in -->
+    <section id="lobby-section">
+      <h2>Play against someone</h2>
+
+      <div class="lobby-grid">
+
+        <div class="lobby-card">
+          <h3>Draw</h3>
+          <p class="lobby-hint">Open a room, get a secret word, and share the code with your opponent.</p>
+
+          <div class="difficulty-options" role="radiogroup" aria-label="Difficulty">
+            <label><input type="radio" name="difficulty" value="easy" checked> Easy &mdash; 90s, 10 pts each</label>
+            <label><input type="radio" name="difficulty" value="medium"> Medium &mdash; 60s, 20 pts each</label>
+            <label><input type="radio" name="difficulty" value="hard"> Hard &mdash; 45s, 30 pts each</label>
+          </div>
+
+          <button type="button" id="create-btn">Open a room</button>
+        </div>
+
+        <div class="lobby-card">
+          <h3>Guess</h3>
+          <p class="lobby-hint">Got a room code from a friend? Type it in and start guessing.</p>
+
+          <form id="join-form">
+            <label for="room-code-input">Room code</label>
+            <input type="text" id="room-code-input" class="room-code-input" placeholder="ABCD" maxlength="4"
+              autocomplete="off">
+            <button type="submit" id="join-btn">Join room</button>
+          </form>
+
+          <h4 class="open-rooms-title">Rooms waiting for a guesser</h4>
+          <ul id="open-rooms" class="open-rooms">
+            <li class="empty-note">Looking for open rooms…</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="practice-row">
+        <p class="lobby-hint">
+          Nobody around to play with? <strong>Kibry Bot</strong> will draw for you at the
+          difficulty picked on the left. Practice rounds don't earn points.
+        </p>
+        <button type="button" id="practice-btn" class="secondary">Practise against Kibry Bot</button>
+      </div>
+    </section>
+
+    <!-- Step 2 (drawer only): wait for the other player -->
+    <section id="waiting-section" hidden>
+      <h2>Waiting for a guesser…</h2>
+      <p>Give this room code to the person you want to play against.</p>
+
+      <p class="room-code" id="room-code"></p>
+
+      <p class="prompt">Your secret word is <strong id="waiting-word"></strong> — don't let them see it!</p>
+
+      <button type="button" id="cancel-room-btn" class="secondary">Close the room</button>
+    </section>
+
+    <!-- Step 3: the round itself -->
+    <section id="round-section" hidden>
+      <div class="round-header">
+        <p class="role-badge" id="role-badge"></p>
+        <p class="prompt" id="prompt-line"></p>
+        <p class="timer" id="timer" aria-live="polite">0:00</p>
+      </div>
+
+      <canvas id="drawing-canvas" width="600" height="420"></canvas>
+
+      <!-- Only the drawer gets the brush tools -->
+      <div class="tools" id="tools" hidden>
+        <label for="colour-picker">Colour</label>
+        <input type="color" id="colour-picker" value="#222222">
+
+        <label for="brush-size">Brush</label>
+        <input type="range" id="brush-size" min="2" max="30" value="6">
+
+        <button type="button" id="eraser-btn" class="secondary">Eraser</button>
+        <button type="button" id="clear-btn" class="secondary">Clear</button>
+      </div>
+
+      <!-- Only the guesser gets the guess box -->
+      <form id="guess-form" hidden>
+        <label for="guess-input">Your guess</label>
+        <div class="guess-row">
+          <input type="text" id="guess-input" placeholder="What are they drawing?" maxlength="40" autocomplete="off">
+          <button type="submit" id="guess-btn">Guess</button>
+        </div>
+      </form>
+
+      <h3 class="guess-feed-title">Guesses</h3>
+      <ul id="guess-feed" class="guess-feed">
+        <li class="empty-note">No guesses yet.</li>
+      </ul>
+
+      <div class="button-row">
+        <button type="button" id="quit-btn" class="secondary">Quit round</button>
+      </div>
+    </section>
+
+    <!-- Step 4: result -->
+    <section id="result-section" hidden>
+      <h2 id="result-title"></h2>
+      <p id="result-message"></p>
+      <img id="result-image" alt="The finished drawing" hidden>
+      <button type="button" id="play-again-btn">Back to the lobby</button>
+    </section>
+
+    <p id="game-message" class="message" role="status"></p>
+
+  </main>
+
+  <script type="module" src="game.js" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+{
+  "ignore": [
+    "_extras/api-docs/swagger-output.json"
+  ]
+}

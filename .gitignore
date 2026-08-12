@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# Logs
+*.log
+
+# Test coverage
+coverage
+
+# Test coverage
+coverage
+
+# Generated API docs
+_extras/api-docs/swagger-output.json
+
+# Drizzle migrations
+drizzle
+# Environment variables
+.env
+
+# Working files for teaching Kibry Bot new words
+gemini-prompt.txt
+reply*.json

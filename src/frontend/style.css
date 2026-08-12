@@ -1,0 +1,708 @@
+/* ===========================
+   Kibry — Shared Styles
+
+   A bright, hand-drawn look: a blue board covered in faint doodles, with
+   white cards sitting on top of it and chunky pressable buttons.
+   =========================== */
+
+:root {
+  --blue: #2f6fe0;
+  --blue-dark: #1c4bab;
+  --ink: #2b2d42;
+  --paper: #ffffff;
+  --sun: #ffd23f;
+  --grass: #06d6a0;
+  --berry: #ef476f;
+  --sky: #4cc9f0;
+  --muted: #6c7a92;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--blue);
+  /* Faint doodles scribbled across the board, drawn inline so the page still
+     looks right with no internet. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.14' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M42 18l7 18h19l-15 12 6 19-17-12-17 12 6-19-15-12h19z'/%3E%3Cpath d='M188 26c-8-10-24-5-24 7 0 12 16 20 24 28 8-8 24-16 24-28 0-12-16-17-24-7z'/%3E%3Cpath d='M36 128a18 18 0 0135-8 16 16 0 0113 22H40a14 14 0 01-4-14z'/%3E%3Ccircle cx='192' cy='134' r='24'/%3E%3Ccircle cx='184' cy='127' r='2'/%3E%3Ccircle cx='200' cy='127' r='2'/%3E%3Cpath d='M181 142q11 10 22 0'/%3E%3Cpath d='M44 232l22-40 22 40z'/%3E%3Cpath d='M58 232h16v14H58z'/%3E%3Cpath d='M158 214q26-20 52 0-26 20-52 0z'/%3E%3Cpath d='M210 214l14-11v22z'/%3E%3Cpath d='M120 60v34M103 77h34'/%3E%3Cpath d='M112 168q14-16 28 0t28 0'/%3E%3C/g%3E%3C/svg%3E");
+  padding: 20px;
+}
+
+header,
+main {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ===========================
+   Header and logo
+   =========================== */
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  font-size: 3.4rem;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+/* Each letter gets its own colour, with a dark outline so it reads as a
+   sticker sitting on the blue. */
+.logo span {
+  display: inline-block;
+  text-shadow:
+    3px 3px 0 var(--ink),
+    -1px -1px 0 var(--ink),
+    1px -1px 0 var(--ink),
+    -1px 1px 0 var(--ink);
+}
+
+.logo span:nth-child(1) { color: var(--sun); transform: rotate(-6deg); }
+.logo span:nth-child(2) { color: #ff8c42; transform: rotate(3deg); }
+.logo span:nth-child(3) { color: var(--berry); transform: rotate(-3deg); }
+.logo span:nth-child(4) { color: var(--grass); transform: rotate(5deg); }
+.logo span:nth-child(5) { color: var(--sky); transform: rotate(-4deg); }
+
+header p {
+  color: #eaf1ff;
+  margin-top: 6px;
+  font-size: 1rem;
+}
+
+/* ===========================
+   Cards
+   =========================== */
+
+section {
+  background-color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 0 rgba(27, 42, 70, 0.35);
+}
+
+section h2 {
+  font-size: 1.35rem;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+/* ===========================
+   Player bar / navigation
+   =========================== */
+
+.player-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 0 rgba(27, 42, 70, 0.35);
+}
+
+.player-name {
+  font-weight: bold;
+  color: var(--ink);
+}
+
+.player-stats {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.link-button:hover {
+  color: var(--berry);
+  text-decoration: underline;
+  background: none;
+  transform: none;
+}
+
+/* ===========================
+   Forms and buttons
+   =========================== */
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--ink);
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 14px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(47, 111, 224, 0.25);
+}
+
+/* Chunky buttons that press down when clicked. */
+button {
+  background-color: var(--sun);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #ffdc6b;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+button:disabled {
+  background-color: #dfe4ec;
+  color: var(--muted);
+  cursor: not-allowed;
+  box-shadow: 0 4px 0 #b9c1ce;
+  border-color: #b9c1ce;
+}
+
+button.secondary {
+  background-color: var(--paper);
+}
+
+button.secondary:hover:not(:disabled) {
+  background-color: #f1f4f9;
+}
+
+button.secondary.active {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+/* ===========================
+   Messages
+   =========================== */
+
+.message {
+  text-align: center;
+  color: #eaf1ff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  min-height: 1.4em;
+  margin-top: 10px;
+}
+
+.message.error {
+  color: #ffe066;
+}
+
+/* Inside a white card the message needs dark text instead. */
+section .message {
+  color: var(--muted);
+}
+
+section .message.error {
+  color: var(--berry);
+}
+
+/* ===========================
+   Lobby
+   =========================== */
+
+.lobby-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.lobby-card {
+  border: 3px dashed #c8d4e8;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.lobby-card h3 {
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.lobby-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.room-code-input {
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.open-rooms-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin: 18px 0 8px;
+}
+
+.open-rooms {
+  list-style: none;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.open-rooms li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 2px dotted #dbe3f0;
+  font-size: 0.9rem;
+}
+
+.open-rooms li strong {
+  letter-spacing: 0.15em;
+  color: var(--blue);
+}
+
+.open-rooms button {
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.empty-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.practice-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 3px dashed #c8d4e8;
+}
+
+.practice-row .lobby-hint {
+  margin: 0;
+  flex: 1 1 240px;
+}
+
+/* ===========================
+   Waiting for an opponent
+   =========================== */
+
+.room-code {
+  font-size: 2.8rem;
+  font-weight: bold;
+  letter-spacing: 0.35em;
+  text-align: center;
+  color: var(--blue);
+  background-color: #eaf1ff;
+  border: 3px dashed var(--blue);
+  border-radius: 14px;
+  padding: 14px 10px 14px 24px;
+  margin: 14px 0;
+}
+
+/* ===========================
+   Difficulty picker
+   =========================== */
+
+.difficulty-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.difficulty-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  border: 3px solid #dbe3f0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: var(--ink);
+}
+
+.difficulty-options label:hover {
+  border-color: var(--blue);
+  background-color: #eaf1ff;
+}
+
+/* ===========================
+   The round
+   =========================== */
+
+.round-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.role-badge {
+  font-size: 0.78rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--paper);
+  background-color: var(--blue);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+.role-badge.guessing {
+  background-color: var(--grass);
+  color: var(--ink);
+}
+
+.prompt {
+  font-size: 1.05rem;
+}
+
+.prompt strong {
+  font-size: 1.45rem;
+  color: var(--blue);
+  text-transform: capitalize;
+}
+
+/* The blanked-out word the guesser sees, e.g. "______ _______". */
+.prompt strong.hint {
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.15em;
+  color: var(--grass);
+}
+
+.timer {
+  font-size: 1.5rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: bold;
+  color: var(--ink);
+  background: #eaf1ff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  padding: 0 12px;
+}
+
+.timer.urgent {
+  color: var(--paper);
+  background: var(--berry);
+}
+
+#drawing-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+/* The rainbow border needs a gradient rather than a flat colour.
+   It is painted as two background layers behind the see-through border rather
+   than with `border-image`, because `border-image` squares off the rounded
+   corners and the rainbow ended up looking like a different shape to every
+   other border in the shop. The inner layer hides the gradient behind the
+   drawing; the outer one shows through the transparent border. */
+#drawing-canvas[data-cosmetic="border-rainbow"],
+.cosmetic-preview[data-cosmetic="border-rainbow"] {
+  background-image:
+    linear-gradient(var(--rainbow-inner, #fff), var(--rainbow-inner, #fff)),
+    linear-gradient(45deg, #e63946, #f4a261, #e9c46a, #2a9d8f, #1d7fd4, #9b5de5);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  background-repeat: no-repeat;
+}
+
+/* The shop tile sits on a slightly grey square rather than white. */
+.cosmetic-preview[data-cosmetic="border-rainbow"] {
+  --rainbow-inner: #fafafa;
+}
+
+/* The guesser watches the canvas rather than drawing on it. */
+#drawing-canvas.watching {
+  cursor: default;
+  pointer-events: none;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.tools label {
+  margin: 0;
+}
+
+/* ===========================
+   Guessing
+   =========================== */
+
+#guess-form {
+  margin-top: 14px;
+}
+
+.guess-row {
+  display: flex;
+  gap: 8px;
+}
+
+.guess-row input[type="text"] {
+  margin-bottom: 0;
+}
+
+.guess-feed-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin: 16px 0 6px;
+}
+
+.guess-feed {
+  list-style: none;
+  max-height: 130px;
+  overflow-y: auto;
+  border: 3px dashed #c8d4e8;
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.guess-feed li {
+  padding: 3px 0;
+  font-size: 0.9rem;
+  color: var(--ink);
+  border-bottom: 2px dotted #eef2f8;
+}
+
+.guess-feed li:last-child {
+  border-bottom: none;
+}
+
+.guess-feed li.correct {
+  color: var(--grass);
+  font-weight: bold;
+}
+
+/* ===========================
+   Result
+   =========================== */
+
+#result-title {
+  color: var(--grass);
+  font-size: 1.6rem;
+}
+
+#result-image {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  margin: 14px 0;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+}
+
+/* ===========================
+   Shop
+   =========================== */
+
+.cosmetic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.cosmetic-card {
+  border: 3px solid #dbe3f0;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+}
+
+.cosmetic-card.owned {
+  background-color: #eafff8;
+  border-color: var(--grass);
+}
+
+.cosmetic-card h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.cosmetic-preview {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 10px;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.cosmetic-description {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.cosmetic-price {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.cosmetic-card button {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+/* ===========================
+   Leaderboard
+   =========================== */
+
+#leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#leaderboard-table th,
+#leaderboard-table td {
+  padding: 10px;
+  border-bottom: 2px dotted #dbe3f0;
+  text-align: left;
+}
+
+#leaderboard-table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+#leaderboard-table th:last-child {
+  text-align: right;
+}
+
+.rank-cell {
+  width: 70px;
+  font-size: 1.1rem;
+}
+
+.score-cell {
+  text-align: right;
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+}
+
+.current-player {
+  background-color: #eaf1ff;
+}
+
+.current-player td {
+  font-weight: bold;
+  color: var(--blue);
+}
+
+/* ===========================
+   Small screens
+   =========================== */
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .logo {
+    font-size: 2.6rem;
+  }
+
+  .player-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
